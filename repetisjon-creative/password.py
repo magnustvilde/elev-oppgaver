@@ -1,7 +1,74 @@
 # create a prompt where the user is asked to create an account with a username
 # and a password
+print('You will now create a user!')
 
 
+def createUsername():
+    username = input('Username: ')
+    return username
+
+def createPassword():
+    password = input('Password: ')
+    repeat = input('Repeat password: ')
+    if checkPassword(password, repeat):
+        return password
+    
+    return createPassword()
+
+def checkPassword(password, repeat):
+    if checkLength(password) and checkRepeat(password, repeat) and checkCharacters(password):
+        return True
+    return False
+
+def checkRepeat(password, repeat):
+    if password == repeat:
+        return True
+    print('Passwords do not match. Try again.')
+    return False
+
+def checkLength(password):
+    if len(password) >= 8 and (len(password) <= 16):
+        return True
+    print('Length of password must be between 8 and 16 characters. Try again.')
+    return False
+
+def checkCharacters(password):
+    if lowerCheck(password) and upperCheck(password) and numberCheck(password):
+        return True
+    return False
+
+def lowerCheck(password):
+    lower = 'qwertyuiopåasdfghjkløæzxcvbnm'
+    for letter in password:
+        if letter in lower:
+            return True
+    print('Password must contain a lowercase letter. Try again.')
+    return False
+
+def upperCheck(password):
+    upper = 'qwertyuiopåasdfghjkløæzxcvbnm'.upper()
+    for letter in password:
+        if letter in upper:
+            return True
+    print('Password must contain a uppercase letter. Try again.')
+    return False
+
+def numberCheck(password):
+    numbers = '1234567890'
+    for letter in password:
+        if letter in numbers:
+            return True
+    print('Password must contain a number. Try again.')
+    return False
+
+
+def main():
+    username = createUsername()
+    password = createPassword()
+    print(username)
+    print(password)
+
+main()
 
 # the password should be between 8 and 16 in length
 # and must contain a number, a lowercase letter and an uppercase letter
@@ -24,5 +91,6 @@
 # we must store the password hashed - use the hashlib-module!
 
 
-
 # next up we are going to store the information in a binary-file
+
+
