@@ -1,7 +1,9 @@
 # create a prompt where the user is asked to create an account with a username
 # and a password
-print('You will now create a user!')
+# the password should be between 8 and 16 in length
+# and must contain a number, a lowercase letter and an uppercase letter
 
+import re
 
 def createUsername():
     username = input('Username: ')
@@ -61,25 +63,27 @@ def numberCheck(password):
     print('Password must contain a number. Try again.')
     return False
 
+# we must now require an email instead of a username for the login, but 
+# keep the option of the username 
+# the email must have a '@', and end in '.no', '.com' or '.org'
+def registerEmail():
+    email = input('Email: ')
+    if isValidEmail(email):
+        return email
+    return registerEmail()
+
+def isValidEmail(email):
+    return re.match(r'^[\w\.\+-]+@[\w\.-]+\.[a-zA-Z]{2,}$', email)
 
 def main():
+    print('You will now create a user!')
     username = createUsername()
+    email = registerEmail()
     password = createPassword()
     print(username)
     print(password)
 
 main()
-
-# the password should be between 8 and 16 in length
-# and must contain a number, a lowercase letter and an uppercase letter
-
-
-
-# we must now require an email instead of a username for the login, but 
-# keep the option of the username 
-# the email must have a '@', and end in '.no', '.com' or '.org'
-# still ask the user
-
 
 # the user should be asked to put their first and last-name, and the program 
 # should then use their first-name in all subsequent prompts
